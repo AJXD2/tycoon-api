@@ -31,8 +31,3 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifecycle,  # type: ignore
 )
-
-
-@app.get("/")
-async def root():
-    return {"message": "Hello World"}
