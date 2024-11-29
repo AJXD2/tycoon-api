@@ -11,6 +11,8 @@ class Settings(BaseSettings):
     MONGODB_URI: str
     REDIS_URI: str
     SECRET_KEY: str = Field(default_factory=generate_secret_key)
+    JWT_ALGORITHM: str
+    ACCESS_TOKEN_EXPIRE_MINUTES: int
 
     class Config:
         env_file = ".env"

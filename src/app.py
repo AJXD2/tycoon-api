@@ -4,14 +4,16 @@ from beanie import init_beanie
 from fastapi import FastAPI
 from src.settings import settings
 from contextlib import asynccontextmanager
+from src.routes.auth import router as auth_router
+import src.models as models
 
 
 @asynccontextmanager
 async def lifecycle(app: FastAPI):
     client = AsyncIOMotorClient(settings.MONGODB_URI)
     await init_beanie(
-        database=client.get_default_database(),
-        document_models=[],
+        database=client.get_database("tycoon-db-dev"),
+        document_models=[models.User],
     )
     try:
         yield
@@ -31,3 +33,5 @@ app = FastAPI(
     version="0.1.0",
     lifespan=lifecycle,  # type: ignore
 )
+
+app.include_router(auth_router)
