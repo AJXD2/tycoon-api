@@ -82,10 +82,5 @@ class ListResponse[ResType](BaseModel):
     data: list[ResType]
 
 
-class ResponseError(BaseModel):
-    message: str
-
-
+# Premade Types
 type UserResponse = Response[User.RedactedUser]
-type SessionListResponse = ListResponse[Session]
-type TokenResponse = Response[Token]
