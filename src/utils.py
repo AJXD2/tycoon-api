@@ -1,5 +1,5 @@
 from datetime import datetime, timedelta, timezone
-from typing import Union
+import typing
 import jwt
 from src.settings import settings
 import bcrypt
@@ -8,7 +8,9 @@ import logging
 from logging.handlers import RotatingFileHandler
 
 
-def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None):
+def create_access_token(
+    data: dict, expires_delta: typing.Union[timedelta, None] = None
+):
     to_encode = data.copy()
     if expires_delta:
         expire = datetime.now(timezone.utc) + expires_delta
@@ -20,7 +22,7 @@ def create_access_token(data: dict, expires_delta: Union[timedelta, None] = None
     return jwt.encode(to_encode, settings.SECRET_KEY, algorithm=settings.JWT_ALGORITHM)
 
 
-def decode_access_token(token: str):
+def decode_access_token(token: str) -> typing.Optional[dict]:
     try:
         return jwt.decode(
             token, settings.SECRET_KEY, algorithms=[settings.JWT_ALGORITHM]
