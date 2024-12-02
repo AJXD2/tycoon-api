@@ -15,6 +15,7 @@ from src.utils import logger
 
 # Routes
 from src.routes.auth import router as auth_router
+from src.routes.economy import router as economy_router
 
 
 @asynccontextmanager
@@ -80,3 +81,4 @@ async def log_requests(request: Request, call_next):
 
 
 app.include_router(auth_router)
+app.include_router(economy_router)
