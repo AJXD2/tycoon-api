@@ -1,0 +1,6 @@
+services:
+  mongo:
+    image: mongo
+    container_name: devcontainer-mongodb
+    volumes:
+      - mongodb_data:/data/db
